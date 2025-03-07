@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--질문 등록-->
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <form method="post" class="post-form my-3">
+        {{form.csrf_token}}
+        {% include "form_errors.html" %}
+        <div class="form-group">
+            <div class="mb-3">
+            <label for="subject">{{form.subject.label}}</label>
+<!-- GET방식일 경우 form.subject.data 등은 None               -->
+            <input type="text" name="subject" id="subject" class="form-control" value="{{form.subject.data or ''}}">
+        </div>
+        <div class="mb-3">
+            <label for="content">{{form.content.label}}</label>
+            <textarea rows="10" name="content" id="content" class="form-control">{{form.content.data or ''}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">저장하기</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+
+
+<!--        {{form.subject.label}}-->
+<!--        {{form.subject(class="form-control")}}-->
+<!--        {{form.content.label}}-->
+<!--        {{form.content(class="form-control mb-3")}}-->
+
+<!-- 같은 템플릿을 여러 기능에서 사용하기 위해, action을 비워 두자 -->

@@ -3,7 +3,6 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 
-import config
 
 naming_convention = {
     "ix": 'ix_%(column_0_label)s',
@@ -20,8 +19,8 @@ migrate = Migrate()
 def create_app():
     # 플라스크 애플리케이션 생성, __name__에는 모듈명 (여기선 "pybo")
     app = Flask(__name__)
-    # config.py 파일에 작성한 항목 읽기
-    app.config.from_object(config)
+    # 환경 변수 APP_CONFIG_FILE에 정의된 파일을 환경파일로 사용
+    app.config.from_envvar('APP_CONFIG_FILE')
 
     # ORM: app에 db, migrate 객체 등록
     # 전역 변수로 db, migrate를 미리 만들어 두는 이유:
